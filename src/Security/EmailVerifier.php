@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Security;
-
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,13 +41,14 @@ class EmailVerifier
         $context['expiresAtMessageKey'] = $signatureComponents->getExpirationMessageKey();
         $context['expiresAtMessageData'] = $signatureComponents->getExpirationMessageData();
         
-
+        //sen msg 
         $client = SMSClient::getInstance('2Yf3CBy0mWhiS0TcVCWonAOkEUXs6cLF', 'Bgflgfsi6lEN1e2V');
         $sms = new SMS($client);
         $sms->message( "Welcome to FlyFood check your email or Click on the link to verify your Account: " . strval($context['signedUrl'] = $signatureComponents->getSignedUrl()))
             ->from('+21627300520')
-            ->to('+21653912886')
+            ->to($user->getTelephone())
             ->send();
+        //send msg
         $email->context($context);
 
         

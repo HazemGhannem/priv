@@ -104,8 +104,26 @@
     "knplabs/knp-paginator-bundle": {
         "version": "v5.8.0"
     },
+    "knpuniversity/oauth2-client-bundle": {
+        "version": "2.10",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.20",
+            "ref": "1ff300d8c030f55c99219cc55050b97a695af3f6"
+        }
+    },
     "laminas/laminas-code": {
         "version": "4.5.1"
+    },
+    "league/oauth2-client": {
+        "version": "2.6.1"
+    },
+    "league/oauth2-github": {
+        "version": "3.0.0"
+    },
+    "league/oauth2-google": {
+        "version": "4.0.0"
     },
     "mediumart/orange-sms": {
         "version": "2.0.0"

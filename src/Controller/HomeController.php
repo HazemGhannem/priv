@@ -22,10 +22,11 @@ class HomeController extends AbstractController
      */
     public function test(): Response
     {
-        return $this->render('backtemplate/virtual-reality.html.twig', [
+        return $this->render('base.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }
+    
    
 
     

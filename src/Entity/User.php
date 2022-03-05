@@ -52,7 +52,7 @@ class User implements UserInterface
     private $isVerified = false;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $Telephone;
 
@@ -66,7 +66,30 @@ class User implements UserInterface
      */
     private $Image;
 
+    /**
+     * @ORM\Column(type="string", length=255,nullable=true)
+     */
+    private $githubId;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $githubAccessToken;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $googleId;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $googleAccessToken;
+
+
+    public function __construct(){
+        $this->createAt= new \Datetime();
+    }
     
 
     public function getId(): ?int
@@ -85,6 +108,7 @@ class User implements UserInterface
 
         return $this;
     }
+
 
     /**
      * A visual identifier that represents this user.
@@ -217,6 +241,54 @@ class User implements UserInterface
     public function setImage(?string $Image): self
     {
         $this->Image = $Image;
+
+        return $this;
+    }
+
+    public function getGithubId(): ?string
+    {
+        return $this->githubId;
+    }
+
+    public function setGithubId(string $githubId): self
+    {
+        $this->githubId = $githubId;
+
+        return $this;
+    }
+
+    public function getGithubAccessToken(): ?string
+    {
+        return $this->githubAccessToken;
+    }
+
+    public function setGithubAccessToken(?string $githubAccessToken): self
+    {
+        $this->githubAccessToken = $githubAccessToken;
+
+        return $this;
+    }
+
+    public function getGoogleId(): ?string
+    {
+        return $this->googleId;
+    }
+
+    public function setGoogleId(?string $googleId): self
+    {
+        $this->googleId = $googleId;
+
+        return $this;
+    }
+
+    public function getGoogleAccessToken(): ?string
+    {
+        return $this->googleAccessToken;
+    }
+
+    public function setGoogleAccessToken(?string $googleAccessToken): self
+    {
+        $this->googleAccessToken = $googleAccessToken;
 
         return $this;
     }

@@ -24,11 +24,14 @@ security:
                 csrf_parameter: _csrf_security_token
                 csrf_token_id: a_private_string
         # false to see the site as user 
-            anonymous: lazy
+            anonymous: ~
             provider: app_user_provider
             guard:
+                entry_point: App\Security\LoginFormAuthenticator
                 authenticators:
                     - App\Security\LoginFormAuthenticator
+                    - App\Security\GoogleAuthenticator
+            access_denied_handler: App\Security\AccessDeniedHandler        
             
           
             logout:
