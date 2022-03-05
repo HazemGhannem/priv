@@ -33,6 +33,7 @@ class AdminController extends AbstractController
         
         return $this->render('admin/index.html.twig', [
             'users' => $users
+            
         ]);
     }
     /*public function add(Request $request)

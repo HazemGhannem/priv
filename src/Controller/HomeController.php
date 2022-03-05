@@ -17,15 +17,7 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
-     /**
-     * @Route("/test", name="test")
-     */
-    public function test(): Response
-    {
-        return $this->render('bobot/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
+ 
     
    
 
