@@ -22,7 +22,7 @@ class HomeController extends AbstractController
      */
     public function test(): Response
     {
-        return $this->render('base.html.twig', [
+        return $this->render('bobot/index.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }

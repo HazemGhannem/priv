@@ -789,7 +789,20 @@
             </div>
           </div>
         </div><!-- end of .container-->
-
+        <!-- chatbot-->
+<script>
+            var botmanWidget = {
+            frameEndpoint: '{{ path("chatframe") }}',
+            chatServer: '{{ path("message") }}',
+            introMessage: 'Hello, I am a Chatbot',
+            title: 'FlyFood Chatbot', 
+            mainColor: '#456765',
+            bubbleBackground: '#ff76f4',
+            aboutText: ''
+        };
+</script>
+<script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
+<!-- chatbot-->
       </section>
       <!-- <section> close ============================-->
       <!-- ============================================-->
