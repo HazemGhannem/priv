@@ -9,6 +9,7 @@ parameters:
 services:
     app.listener.redirect_404_to_homepage:
         class: AppBundle\EventListener\Redirect404ToHomepageListener
+   
         arguments:
             - "@router"
         tags:

@@ -53,7 +53,7 @@ class BobotController extends Controller{
     }
     
     /**
-     * @Route( name="homepage")
+     * @Route("/messaagebot", name="homepage")
      */
     public function indexAction(Request $request)
     {
