@@ -8,21 +8,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class GoogleAuthenticationController extends AbstractController
+class FacebookAuthenticationController extends AbstractController
 {
     /**
      * Link to this controller to start the "connect" process
      * @param ClientRegistry $clientRegistry
      *
-     * @Route("/connect/google", name="connect_google_start")
+     * @Route("/connect/facebook", name="connect_facebook_start")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function connectGoogleAction(ClientRegistry $clientRegistry)
+    public function connectFacebookAction(ClientRegistry $clientRegistry)
     {
         return $clientRegistry
             // ID used in config/packages/knpu_oauth2_client.yaml
-            ->getClient('google')
+            ->getClient('facebook')
             // Request access to scopes
             // https://github.com/thephpleague/oauth2-github
             ->redirect()
@@ -37,10 +37,10 @@ class GoogleAuthenticationController extends AbstractController
      * @param Request $request
      * @param ClientRegistry $clientRegistry
      *
-     * @Route("/connect/google/check", name="connect_google_check")
+     * @Route("/connect/facebook/check", name="connect_facebook_check")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function connectGoogleCheckAction(Request $request, ClientRegistry $clientRegistry)
+    public function connectFacebookCheckAction(Request $request, ClientRegistry $clientRegistry)
     {
         return $this->redirectToRoute('home');
     }

@@ -80,6 +80,7 @@
                                         Sign in
                                     </button>
                                     
+                                         <a href="{{ path('connect_facebook_start') }}"> <img  src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png" height="50px" width="50px"></a>
                                          <a href="{{ path('connect_google_start') }}"> <img  src="https://ipullrank.com/wp-content/uploads/2020/07/png-transparent-google-logo-g-suite-google-guava-google-plus-company-text-logo.png" height="50px" width="50px"></a>
                                     </div>
                                      
@@ -108,7 +109,7 @@
             var botmanWidget = {
             frameEndpoint: '{{ path("chatframe") }}',
             chatServer: '{{ path("message") }}',
-            introMessage: 'Hello, I am a Chatbot ,Write youre problem to fix ;)',
+            introMessage: 'Hello, I am a Foody ,You Can Ask Me Any Thing ;)',
             title: 'FlyFood Chatbot', 
             mainColor: '#456765',
             bubbleBackground: '#ff76f4',

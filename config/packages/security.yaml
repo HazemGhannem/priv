@@ -31,6 +31,7 @@ security:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
                     - App\Security\GoogleAuthenticator
+                    - App\Security\FacebookAuthenticator
             access_denied_handler: App\Security\AccessDeniedHandler        
             
           

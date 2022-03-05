@@ -62,7 +62,7 @@ class User implements UserInterface
     private $isExpired = false;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $Image;
 
@@ -85,6 +85,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $googleAccessToken;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $facebookId;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $facebookAccessToken;
 
 
     public function __construct(){
@@ -289,6 +299,30 @@ class User implements UserInterface
     public function setGoogleAccessToken(?string $googleAccessToken): self
     {
         $this->googleAccessToken = $googleAccessToken;
+
+        return $this;
+    }
+
+    public function getFacebookId(): ?string
+    {
+        return $this->facebookId;
+    }
+
+    public function setFacebookId(?string $facebookId): self
+    {
+        $this->facebookId = $facebookId;
+
+        return $this;
+    }
+
+    public function getFacebookAccessToken(): ?string
+    {
+        return $this->facebookAccessToken;
+    }
+
+    public function setFacebookAccessToken(string $facebookAccessToken): self
+    {
+        $this->facebookAccessToken = $facebookAccessToken;
 
         return $this;
     }

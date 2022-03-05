@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class GoogleAuthenticator extends SocialAuthenticator
+class FacebookAuthenticator extends SocialAuthenticator
 {
     private $clientRegistry;
     private $em;
@@ -33,7 +33,7 @@ class GoogleAuthenticator extends SocialAuthenticator
     public function supports(Request $request)
     {
         // continue ONLY if the current ROUTE matches the check ROUTE
-        return $request->attributes->get('_route') === 'connect_google_check';
+        return $request->attributes->get('_route') === 'connect_facebook_check';
     }
 
     public function getCredentials(Request $request)
@@ -45,24 +45,24 @@ class GoogleAuthenticator extends SocialAuthenticator
         //     return null;
         // }
 
-        return $this->fetchAccessToken($this->getGoogleClient());
+        return $this->fetchAccessToken($this->getFacebookClient());
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        /** @var League\OAuth2\Client\Provider\ResourceOwnerInterface $googleUser */
-        $googleUser = $this->getGoogleClient()->fetchUserFromToken($credentials);
+        /** @var League\OAuth2\Client\Provider\ResourceOwnerInterface $facebookUser */
+        $facebookUser = $this->getFacebookClient()->fetchUserFromToken($credentials);
        
 
         // Note: normally, email is always null if the user has no public email address configured on Github
         // https://stackoverflow.com/questions/35373995/github-user-email-is-null-despite-useremail-scope
-        $email = $googleUser->getEmail();
+        $email = $facebookUser->getEmail();
 
         // 1. have they logged in with Github before? Easy!
-        $existingUser = $this->em->getRepository(User::class)->findOneBy(['googleId' => $googleUser->getId()]);
+        $existingUser = $this->em->getRepository(User::class)->findOneBy(['facebookId' => $facebookUser->getId()]);
         
         // This array contains the API information of the Authenticated Github user
-        $githubData = $googleUser->toArray();
+        $githubData = $facebookUser->toArray();
         
         if ($existingUser) {
             return $existingUser;
@@ -70,7 +70,7 @@ class GoogleAuthenticator extends SocialAuthenticator
         
         // If your application requires an email to persist an User entity, you need to figure out one in case that the Github user doesn't provide one
         if(!$email){
-            $email = "{$googleUser->getId()}@googleoauth.com";
+            $email = "{$facebookUser->getId()}@facebookoauth.com";
             
         }
 
@@ -90,13 +90,13 @@ class GoogleAuthenticator extends SocialAuthenticator
                 // e.g. This is just an example, it depends of your user entity, so be sure to modify this
                 /** @var User $user */
                 $user = new User();
-                $user->setUsername($googleUser->getName());
+                $user->setUsername($facebookUser->getName());
                 $user->setPassword("null");
                 $user->setIsVerified(true);
                 $user->setRoles(["ROLE_USER"]);
                 
-               $user->setImage($googleUser->getAvatar());
-                $user->setEmail($googleUser->getEmail());
+               $user->setImage($facebookUser->getAvatar());
+                $user->setEmail($facebookUser->getEmail());
                
                
             }
@@ -104,8 +104,8 @@ class GoogleAuthenticator extends SocialAuthenticator
 
         // Finally, there should always exist an $user object
         // So update the GithubId and persist it if it doesn't exist
-        $user->setGoogleId($googleUser->getId());
-        //dd($googleUser);
+        $user->setFacebookId($facebookUser->getId());
+        //dd($facebookUser);
         $this->em->persist($user);
         $this->em->flush();
 
@@ -114,12 +114,12 @@ class GoogleAuthenticator extends SocialAuthenticator
     }
 
     /**
-     * @return GoogleClient
+     * @return FacebookClient
      */
-    private function getGoogleClient()
+    private function getFacebookClient()
     {
         // "github_main" is the key used in config/packages/knpu_oauth2_client.yaml
-        return $this->clientRegistry->getClient('google');
+        return $this->clientRegistry->getClient('facebook');
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)

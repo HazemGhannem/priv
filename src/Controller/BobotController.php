@@ -32,7 +32,13 @@ class BobotController extends Controller{
             $bot->reply('Hello!');
         });
         $botman->hears('(cant order food |wanna contact the admin |issue)', function (BotMan $bot) {
-            $bot->reply('here is our email "ghannemhazem@gmail.com" you can contact us for any issue');
+            $bot->reply('Contact Us On "ghannemhazem@gmail.com" To Solve The Issue');
+        });
+        $botman->hears('(thank you|tnx|nice)', function (BotMan $bot) {
+            $bot->reply('Happy to help <3  ');
+        });
+        $botman->hears('(bye|see you|byebye)', function (BotMan $bot) {
+            $bot->reply('Dont Forget to Come Back, bye and Have Nice Day ');
         });
 
         // Set a fallback
@@ -47,7 +53,7 @@ class BobotController extends Controller{
     }
     
     /**
-     * @Route("/try", name="homepage")
+     * @Route( name="homepage")
      */
     public function indexAction(Request $request)
     {
